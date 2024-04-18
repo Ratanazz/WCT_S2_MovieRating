@@ -23,41 +23,56 @@
   }
   
   .SwiperHomepage .swiper-slide {
-    text-align: center;
+    
     font-size: 18px;
     /* change here */
     /* background: #fff; */
     background-image: url('../../../public/assets/Cinema_Bannerblack.png');
     /* Center slide text vertically */
-    display: flex;
+    
     justify-content: center;
     align-items: center;
   }
   
   
  
-  .SwiperHomepage .swiper-slide h1,h2 {
+  .SwiperHomepage .swiper-slide h1,h2,h3 {
     color: white; /* Change font color to white */
   }
   .SwiperHomepage .swiper-slide h1 {
    font-size: 50px;
    font-weight: bold ;
   }
+  .SwiperHomepage .swiper-slide h3 {
+    font-size: 20px;
+    font-weight: bold ;
+    padding-left: 10px;
+   }
   .SwiperHomepage .swiper-slide h2 {
     font-size: 20px;
     font-weight: 400;
   }
+  
+  
   .info1{
     display: flex;
+    margin-top: 5%;
+    
   }
-  .Cardd{
+  .Card{
     display: flex;
     justify-content: space-between ;
+    padding: 5% 8% ;
     
   }
  
   .Poster img{
     width: 300px;
     height: 350px;
+    border-radius: 10px;
+    
+  }
+  .rate{
+    display: flex;
     
   }
