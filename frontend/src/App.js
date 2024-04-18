@@ -1,12 +1,16 @@
-
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbarr from './components/Navbarr';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbarr'; 
+import Home from './pages/Home';
+
 function App() {
   return (
     <Router>
-      <Navbarr/>
-      {/* <Route exact path="/" component={Home} /> */}
+      <Navbar /> 
+      <Routes>
+        <Route path="/" element={<Home />} /> 
+        <Route path="/home" element={<Home />} />
+      </Routes>
     </Router>
   );
 }

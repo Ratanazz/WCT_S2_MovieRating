@@ -1,0 +1,63 @@
+.SwiperHomepage {
+    height: 100%;
+  }
+  
+  .SwiperHomepage html,
+  .SwiperHomepage body {
+    position: relative;
+    height: 100%;
+  }
+  
+  .SwiperHomepage body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: white;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .SwiperHomepage .mySwiper {
+    width: 80%;
+    height: 100%;
+  }
+  
+  .SwiperHomepage .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    /* change here */
+    /* background: #fff; */
+    background-image: url('../../../public/assets/Cinema_Bannerblack.png');
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+ 
+  .SwiperHomepage .swiper-slide h1,h2 {
+    color: white; /* Change font color to white */
+  }
+  .SwiperHomepage .swiper-slide h1 {
+   font-size: 50px;
+   font-weight: bold ;
+  }
+  .SwiperHomepage .swiper-slide h2 {
+    font-size: 20px;
+    font-weight: 400;
+  }
+  .info1{
+    display: flex;
+  }
+  .Cardd{
+    display: flex;
+    justify-content: space-between ;
+    
+  }
+ 
+  .Poster img{
+    width: 300px;
+    height: 350px;
+    
+  }
