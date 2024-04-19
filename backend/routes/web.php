@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MovieController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/movies', [MovieController::class, 'index']); // Route to fetch all movies
+Route::post('/movies', [MovieController::class, 'store']);
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
