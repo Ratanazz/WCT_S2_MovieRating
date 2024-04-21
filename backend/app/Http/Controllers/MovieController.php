@@ -32,6 +32,7 @@ class MovieController extends Controller
         'summary' => 'required|string',
         'genre' => 'required|string',
         'release_date' => 'required|date',
+        'runtime_minutes' => 'nullable|integer', // Allow null values for runtime
         'rating' => 'required|numeric|between:0,5', // Ensure rating is between 0 and 5
         'image_poster' => 'nullable|string', // Allow null values for poster
         'trailer' => 'nullable|string', // Allow null values for trailer

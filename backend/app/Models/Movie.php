@@ -15,6 +15,7 @@ use HasFactory;
        'genre',
        'release_date',
        'rating',
+       'runtime_minutes',
        'image_poster',
        'trailer',
    ];
