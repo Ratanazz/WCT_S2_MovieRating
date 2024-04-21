@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import for creating links
+import './Moviepage.css';
 
 
 function Movies() {
@@ -15,22 +15,26 @@ function Movies() {
     fetchMovies();
   }, []);
   return (
-    <div><ul>
-    {movies.map((movie) => (
-      <li key={movie.id}>
-        <h2>{movie.name}</h2>
-        <p>
-          {movie.summary.substring(0, 100)}... {/* Truncate summary to first 100 characters and add ellipsis */}
-          <br />
-          Genre: {movie.genre} <br />
-          Release Date: {movie.release_date} <br />
-          Rating: {movie.rating}
-        </p>
-        <Link to={`/movies/${movie.id}`}>Details</Link> {/* Create link to movie details page */}
-      </li>
-    ))}
-  </ul>
-  </div>
+    <div className="MoviePage">
+      <div className='cardgroup'>
+      {movies.map((movie, index) => (
+        <div className="card" style={{ width: '13rem' }} key={index}>
+          <img src={movie.image_poster} className="card-img-top" alt="Movie Poster" />
+          <div className="card-body">
+            <div className='release_date'>
+              <h1 >{movie.name}</h1>
+              <h2 >Genre: <span className='info-span'>{movie.genre}</span> </h2>
+              <h2 >Rating: <span className='info-span'>{movie.rating}</span></h2>
+              <h2 >Release: <span className='info-span'>{movie.release_date}</span></h2>
+            </div>
+      
+      
+          </div>
+        </div>
+      ))}
+        </div>
+    </div>
+  
   )
 }
 
