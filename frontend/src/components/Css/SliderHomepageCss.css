@@ -1,0 +1,41 @@
+.container{
+    width: 90%;
+    margin: 3% auto 0 auto;
+}
+.tittle h1{
+    color: aliceblue;
+    font-weight: 500;
+}
+.movie-card img{
+    width: 200px;
+    height: 190px;
+    border-radius: 10px;
+}
+.movie-card{
+    width: 200px;
+    padding: 0;
+    margin: 5% 0;
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+.movie-card h2{
+    font-size: 20px;
+    color: #000;
+    font-weight: 600;
+}
+    .movie-card h3{
+        font-size: 15px;
+        color: #000;
+        font-weight: 300;
+}
+.infocard{
+    padding: 3px 10px;
+}
+.bold{
+    font-weight: 600;
+    padding-right: 3px;
+}
+.addicon{
+    display: flex;
+
+}

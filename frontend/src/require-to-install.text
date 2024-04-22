@@ -1,3 +1,4 @@
 1. npm install --save @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
 2.bootstrap
 3.swiper
+4. npm install react-slick slick-carousel
