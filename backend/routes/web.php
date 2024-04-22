@@ -7,6 +7,4 @@ Route::get('/movies', [MovieController::class, 'index']); // Route to fetch all 
 Route::post('/movies', [MovieController::class, 'store']);
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+

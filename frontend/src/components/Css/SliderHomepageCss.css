@@ -1,5 +1,5 @@
 .container{
-    width: 90%;
+    width: 95%;
     margin: 3% auto 0 auto;
 }
 .tittle h1{
@@ -12,12 +12,18 @@
     border-radius: 10px;
 }
 .movie-card{
+    border: 1px solid #ccc;
     width: 200px;
     padding: 0;
     margin: 5% 0;
     background-color: aliceblue;
     border-radius: 10px;
+    overflow: hidden;
+  transition: transform 0.2s ease-in-out;
 }
+.movie-card:hover {
+    transform: scale(1.08); /* Increase size on hover */
+  }
 .movie-card h2{
     font-size: 20px;
     color: #000;

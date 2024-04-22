@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'; // Import Swiper components
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { MOVIES_API_URL } from '../apiUrl';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 
 function SwiperHomepage() {
@@ -15,7 +16,7 @@ function SwiperHomepage() {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const response = await axios.get('http://127.0.0.1:8000/movies'); // Replace with your API endpoint
+      const response = await axios.get(MOVIES_API_URL); // Replace with your API endpoint
       setMovies(response.data);
     };
 

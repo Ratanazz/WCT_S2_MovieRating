@@ -6,13 +6,13 @@ import 'slick-carousel/slick/slick.css'; // Import slick carousel styles
 import 'slick-carousel/slick/slick-theme.css'; // Import theme (optional)
 import axios from 'axios';
 import './Css/SliderHomepageCss.css';
-
+import { MOVIES_API_URL } from '../apiUrl';
 function SliderHomeMostRated() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const response = await axios.get('http://127.0.0.1:8000/movies'); // Replace with your API endpoint
+      const response = await axios.get(MOVIES_API_URL); // Replace with your API endpoint
       setMovies(response.data);
     };
 
