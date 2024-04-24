@@ -18,6 +18,10 @@ use HasFactory;
        'runtime_minutes',
        'image_poster',
        'trailer',
+       'rated_type',
+       'director',
+       'wrtitter',
+       'production',
    ];
 }
 

@@ -47,8 +47,8 @@ function MovieDetails() {
                  <p>{movie.summary}</p>
              </div>
              <div className="moviedetail-info">
-                 <h4 class="red-line-heading">Rating:</h4>
-                 <h5> R (Sexual Content/Nudity|Language Throughout|Drug Use|Strong Bloody Violence)</h5>
+                 <h4 class="red-line-heading">Content Rated:</h4>
+                 <h5> {movie.rated_type}</h5>
              </div>
              <div className="moviedetail-info">
                  <h4 class="red-line-heading">Genre:</h4>
@@ -56,11 +56,11 @@ function MovieDetails() {
              </div>
              <div className="moviedetail-info">
                  <h4 class="red-line-heading">Director:</h4>
-                 <h5> John Paessano</h5>
+                 <h5> {movie.director}</h5>
              </div>
              <div className="moviedetail-info">
                  <h4 class="red-line-heading">Writter:</h4>
-                 <h5> John Paessano</h5>
+                 <h5> {movie.wrtitter}</h5>
              </div>
              <div className="moviedetail-info">
                  <h4 class="red-line-heading">ReleaseDate:</h4>
@@ -68,11 +68,11 @@ function MovieDetails() {
              </div>
              <div className="moviedetail-info">
                  <h4 class="red-line-heading">RunTime:</h4>
-                 <h5> 2h</h5>
+                 <h5> {movie.runtime_minutes}</h5>
              </div>
              <div className="moviedetail-info">
                  <h4 class="red-line-heading">Production:</h4>
-                 <h5> ABC</h5>
+                 <h5> {movie.production}</h5>
              </div>
             
             </div>
