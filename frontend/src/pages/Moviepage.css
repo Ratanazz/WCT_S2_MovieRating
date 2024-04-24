@@ -8,17 +8,35 @@
     width: 90%;
     margin: 0 auto;
 }
-.card{
-    margin: 1rem;
+.card1{
+    margin: 1.5rem 0.8rem;
     background-color: #dbe1e6;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+  transition: transform 0.2s ease-in-out;
 }
-.card img{
+.card1:hover{
+    transform: scale(1.03);
+}
+.card1 img{
     height: 250px;
+    border-radius: 10px;
 }
 .release_date h1{
-    font-size: 24px;
+    font-size: 21px;
 }
 .release_date h2{
     font-size: 15px;
     color: #070F2B;
+}
+.card-body{
+    padding: 10px 8px;
+}
+.info-span{
+    font-weight: 500;
+}
+.link-style {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color from parent */
 }

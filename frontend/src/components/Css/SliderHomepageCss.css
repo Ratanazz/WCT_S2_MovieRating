@@ -8,12 +8,13 @@
 }
 .movie-card img{
     width: 200px;
-    height: 210px;
+    height: 220px;
     border-radius: 10px;
 }
 .movie-card{
     border: 1px solid #ccc;
     width: 200px;
+    height: 360px;
     padding: 0;
     margin: 5% 0;
     background-color: aliceblue;
@@ -25,14 +26,14 @@
     transform: scale(1.08); /* Increase size on hover */
   }
 .movie-card h2{
-    font-size: 20px;
+    font-size: 18px;
     color: #000;
     font-weight: 600;
 }
     .movie-card h3{
         font-size: 15px;
         color: #000;
-        font-weight: 300;
+        font-weight: 400;
 }
 .infocard{
     padding: 3px 10px;

@@ -39,7 +39,7 @@ function SwiperHomepage() {
       <div className="infomation">
         <h1>{movie.name}</h1>
         <div className="info1">
-          <h2>Runtime: {movie.runtime}</h2><h2>Release: {movie.releaseDate}</h2>
+          <h2>Runtime: {movie.runtime}</h2><h2>Release: {movie.release_date}</h2>
         </div>
         <div className="rate">
           <div className="star-icon">

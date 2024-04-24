@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
-
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 Route::get('/movies', [MovieController::class, 'index']); // Route to fetch all movies
 Route::post('/movies', [MovieController::class, 'store']);
 // Route to show a specific movie by ID (GET /movies/{id})
@@ -13,3 +13,6 @@ Route::put('/movies/{movie}', [MovieController::class, 'update'])->where('movie'
 
 // Route to delete a specific movie by ID (DELETE /movies/{id})
 Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])->where('movie', '[0-9]+');
+Route::middleware([EnsureFrontendRequestsAreStateful::class])->get('/sanctum/csrf-cookie', function (Request $request) {
+    return response()->json(['message' => 'CSRF cookie set']);
+});

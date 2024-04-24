@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-
+import axios from 'axios';
+import { MOVIES_API_URL } from '../apiUrl';
 function AddMovieModal({ show, handleClose }) {
   const [formData, setFormData] = useState({
     name: '',
     genre: '',
-    rating: ''
+    rating: '',
+    poster: ''
   });
 
   const handleChange = (e) => {
@@ -16,11 +18,24 @@ function AddMovieModal({ show, handleClose }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add logic to handle form submission (e.g., send data to backend)
-    console.log(formData);
-    handleClose();
+    try {
+      // Fetch CSRF token from the meta tag
+      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      
+      // Include CSRF token in the request headers
+      const headers = {
+        'X-CSRF-TOKEN': csrfToken
+      };
+
+      // Send form data to your Laravel backend
+      const response = await axios.post(MOVIES_API_URL, formData, { headers });
+      console.log(response.data);
+      handleClose();
+    } catch (error) {
+      console.error('Error adding movie:', error);
+    }
   };
 
   return (
@@ -57,6 +72,16 @@ function AddMovieModal({ show, handleClose }) {
               placeholder="Enter rating"
               name="rating"
               value={formData.rating}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formPoster">
+            <Form.Label>Poster</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Poster Url"
+              name="poster"
+              value={formData.poster}
               onChange={handleChange}
             />
           </Form.Group>

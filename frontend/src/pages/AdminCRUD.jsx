@@ -1,8 +1,12 @@
 import React from 'react'
 import CRUDMovieList from '../components/CRUDMovieList'
+import '../App.css';
 function AdminCRUD() {
   return (
-    <CRUDMovieList/>
+    <div className='CRUDpage'>
+        <CRUDMovieList/>
+    </div>
+    
   )
 }
 

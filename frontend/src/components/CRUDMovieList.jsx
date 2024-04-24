@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MOVIES_API_URL } from '../apiUrl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDisplay, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import AddMovieModal from './AddMovieModal';
 function CRUDMovieList() {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [csrfToken, setCsrfToken] = useState('');
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
@@ -32,10 +33,24 @@ function CRUDMovieList() {
   const filteredMovies = movies.filter((movie) =>
     movie.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  useEffect(() => {
+    // Fetch CSRF token from Laravel backend
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await axios.get('/sanctum/csrf-cookie');
+        // Extract CSRF token from response headers
+        const token = response.headers['x-csrf-token'];
+        setCsrfToken(token);
+      } catch (error) {
+        console.error('Error fetching CSRF token:', error);
+      }
+    };
+    fetchCsrfToken();
+  }, []);
 
   return (
     <section className="pb-5 header text-center">
-      <div className="container py-5 text-white">
+      <div className="container py-1 text-white">
         <header className="py-2">
           <h1 className="display-5" style={{color:'black'}}>Movie List</h1>
         </header>
@@ -56,14 +71,14 @@ function CRUDMovieList() {
             <button className="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit" onClick={handleOpenModal}>
                                  Add Movie <FontAwesomeIcon icon={faEdit} />
                                 </button>
-                                <AddMovieModal show={showModal} handleClose={handleCloseModal} />
+                                <AddMovieModal show={showModal} handleClose={handleCloseModal} csrfToken={csrfToken} />
             </div>
         </div>
 
         <div className="row">
           <div className="col-lg-12 mx-auto">
-            <div className="card border-0 shadow">
-              <div className="card-body p-5">
+            <div className="card border-1 shadow">
+              <div className="card-body p-4">
 
                 {/* Responsive table */}
                 <div className="table-responsive">

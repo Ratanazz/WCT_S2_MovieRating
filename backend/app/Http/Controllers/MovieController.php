@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use App\Http\Requests\MovieStoreRequest;
 
 class MovieController extends Controller
 {
@@ -18,6 +19,16 @@ class MovieController extends Controller
 
         return response()->json($movies); // Return movies as JSON for Axios
     }
+    public function show($id)
+    {
+        $movie = Movie::find($id);
+        
+        if (!$movie) {
+            return response()->json(['error' => 'Movie not found'], 404);
+        }
+
+        return response()->json($movie);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -25,7 +36,7 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MovieStoreRequest $request)
     {
     $validatedData = $request->validate([
         'name' => 'required|string',
