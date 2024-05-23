@@ -27,33 +27,43 @@ class ApiController extends Controller
             "message"=>"user registered successfully",
         ]);
     }      
+ // User login
     public function login(Request $request) {
         // Validation
         $request->validate([
           "email" => "required|string|email",
           "password" => "required",
         ]);
-      
+
         // Find user by email
         $user = User::where("email", $request->email)->first();
-      
+
         // Check if user exists and password matches
         if ($user && Hash::check($request->password, $user->password)) {
-          // Generate and return token
-          $token = $user->createToken("mytoken")->plainTextToken;
-          return response()->json([
-            "status" => true,
-            "message" => "User login successful",
-            "token" => $token,
-            "data" => [],
-          ]);
+            // Check if the user has the admin role
+            if ($user->roles()->where('name', 'admin')->exists()) {
+                // Generate and return token
+                $token = $user->createToken("mytoken")->plainTextToken;
+                return response()->json([
+                    "status" => true,
+                    "message" => "Admin login successful",
+                    "token" => $token,
+                    "data" => [],
+                ]);
+            } else {
+                return response()->json([
+                    "status" => false,
+                    "message" => "Unauthorized access. Admins only.",
+                    "data" => [],
+                ]);
+            }
         } else {
-          // Login failed - return appropriate message
-          return response()->json([
-            "status" => false,
-            "message" => "Invalid credentials. Please try again.", // More specific message
-            "data" => [],
-          ]);
+            // Login failed - return appropriate message
+            return response()->json([
+                "status" => false,
+                "message" => "Invalid credentials. Please try again.",
+                "data" => [],
+            ]);
         }
-      }
+    }
 }
