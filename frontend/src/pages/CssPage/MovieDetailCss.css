@@ -73,3 +73,10 @@
     font-size: 20px;
     color: aliceblue;
 }
+.social-share-buttons{
+    display: flex;
+    padding-top: 10px;
+}
+.buttonshare{
+    padding: 0px 10px ;
+}

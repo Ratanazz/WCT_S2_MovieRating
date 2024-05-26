@@ -2,9 +2,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './CssPage/MovieDetailCss.css';
+import {
+    FacebookShareButton,FacebookIcon,TwitterShareButton,TwitterIcon,TelegramShareButton,
+    TelegramIcon,
+    // Add other social media components as needed
+ } from 'react-share';
 function MovieDetails() {
     const [movie, setMovie] = useState(null);
     const { id } = useParams(); // Retrieve the movie ID from the URL
+     
+
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -22,6 +29,11 @@ function MovieDetails() {
     if (!movie) {
         return <div>Loading...</div>;
     }
+       //For sharing
+       const shareUrl = window.location.href; // Get current page URL
+       const shareTitle = `${movie.name} - Movie Rating`; // Dynamic title
+       const shareQuote = ` Genre: ${movie.genre}, UserRating: ${movie.rating}/10`;
+       const shareHashtag = '#movies #moviereview'; // Your desired hashtag
 
     return (
         <div className="Moviedetail-container">
@@ -33,8 +45,35 @@ function MovieDetails() {
             
                         <h2>{movie.genre}</h2>
                         <img src={movie.image_poster} alt="" />
+                        <div className="social-share-buttons">
+                            <h3 style={{ fontSize:'20px', fontWeight:'bold' }}>Share To:</h3>
+                                 
+                                     <div className="buttonshare">
+                                         <FacebookShareButton url={shareUrl}  quote={shareQuote} hashtag={shareHashtag}
+                                                                         className="share-button">
+                                                                         <FacebookIcon size={35} round />
+                                                </FacebookShareButton>
+                                     </div>
+                                            <div className='buttonshare'>
+                                                <TwitterShareButton url={shareUrl} title={shareTitle} hashtags={['movies', 'moviereview']} via="your_mention" // Replace with your Twitter username
+                                                className="share-button" >
+                                                <TwitterIcon size={35} round />
+                                                </TwitterShareButton>
+                                            </div>
+                                            
+                                                <div className="buttonshare">
+                                                    <TelegramShareButton
+                                                        url={shareUrl}title={shareTitle}hashtag={shareHashtag}
+                                                        className="share-button">
+                                                        <TelegramIcon size={35} round />
+                                                    </TelegramShareButton>
+                                                </div>
+                                            
+                                 
+                        </div>
                     </div>
                     <div className="topright">
+                        
                         <h3>Global Rating: {movie.rating}/10</h3>
                         <h3>Audience Rate:  0/10</h3>
                         <iframe src={movie.trailer} frameborder="0"></iframe>
@@ -76,6 +115,9 @@ function MovieDetails() {
              </div>
             
             </div>
+            
+
+            
         </div>
     );
 }
