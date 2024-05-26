@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { MOVIES_API_URL } from '../apiUrl';
+
 function AddMovieModal({ show, handleClose }) {
   const [formData, setFormData] = useState({
     name: '',
+    summary: '',
     genre: '',
+    release_date: '',
+    runtime_minutes: '',
     rating: '',
-    poster: ''
+    image_poster: '',
+    trailer: ''
   });
 
   const handleChange = (e) => {
@@ -20,22 +25,18 @@ function AddMovieModal({ show, handleClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      // Fetch CSRF token from the meta tag
-      const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-      
-      // Include CSRF token in the request headers
-      const headers = {
-        'X-CSRF-TOKEN': csrfToken
-      };
-
-      // Send form data to your Laravel backend
-      const response = await axios.post(MOVIES_API_URL, formData, { headers });
-      console.log(response.data);
-      handleClose();
-    } catch (error) {
-      console.error('Error adding movie:', error);
-    }
+    axios
+      .post(MOVIES_API_URL, formData)
+      .then((response) => {
+        // Handle success, maybe show a success message
+        console.log('Movie added successfully:', response.data);
+        // Close the modal after successful submission
+        handleClose();
+      })
+      .catch((error) => {
+        // Handle error, maybe show an error message
+        console.error('Error adding Movie:', error);
+      });
   };
 
   return (
@@ -55,6 +56,16 @@ function AddMovieModal({ show, handleClose }) {
               onChange={handleChange}
             />
           </Form.Group>
+          <Form.Group controlId="formSummary">
+            <Form.Label>Summary</Form.Label>
+            <Form.Control
+              as="textarea"
+              placeholder="Enter summary"
+              name="summary"
+              value={formData.summary}
+              onChange={handleChange}
+            />
+          </Form.Group>
           <Form.Group controlId="formGenre">
             <Form.Label>Genre</Form.Label>
             <Form.Control
@@ -65,23 +76,53 @@ function AddMovieModal({ show, handleClose }) {
               onChange={handleChange}
             />
           </Form.Group>
+          <Form.Group controlId="formReleaseDate">
+            <Form.Label>Release Date</Form.Label>
+            <Form.Control
+              type="date"
+              name="release_date"
+              value={formData.release_date}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formRuntimeMinutes">
+            <Form.Label>Runtime Minutes</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter runtime"
+              name="runtime_minutes"
+              value={formData.runtime_minutes}
+              onChange={handleChange}
+            />
+          </Form.Group>
           <Form.Group controlId="formRating">
             <Form.Label>Rating</Form.Label>
             <Form.Control
               type="number"
+              step="0.1"
               placeholder="Enter rating"
               name="rating"
               value={formData.rating}
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="formPoster">
-            <Form.Label>Poster</Form.Label>
+          <Form.Group controlId="formImagePoster">
+            <Form.Label>Poster URL</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Enter Poster Url"
-              name="poster"
-              value={formData.poster}
+              type="url"
+              placeholder="Enter poster URL"
+              name="image_poster"
+              value={formData.image_poster}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formTrailer">
+            <Form.Label>Trailer URL</Form.Label>
+            <Form.Control
+              type="url"
+              placeholder="Enter trailer URL"
+              name="trailer"
+              value={formData.trailer}
               onChange={handleChange}
             />
           </Form.Group>

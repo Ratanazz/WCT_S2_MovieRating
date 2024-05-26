@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
-use App\Http\Requests\MovieStoreRequest;
 
 class MovieController extends Controller
 {
@@ -19,10 +18,17 @@ class MovieController extends Controller
 
         return response()->json($movies); // Return movies as JSON for Axios
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         $movie = Movie::find($id);
-        
+
         if (!$movie) {
             return response()->json(['error' => 'Movie not found'], 404);
         }
@@ -36,21 +42,71 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MovieStoreRequest $request)
+    public function store(Request $request)
     {
-    $validatedData = $request->validate([
-        'name' => 'required|string',
-        'summary' => 'required|string',
-        'genre' => 'required|string',
-        'release_date' => 'required|date',
-        'runtime_minutes' => 'nullable|string', // Allow null values for runtime
-        'rating' => 'required|numeric|between:0,5', // Ensure rating is between 0 and 5
-        'image_poster' => 'nullable|string', // Allow null values for poster
-        'trailer' => 'nullable|string', // Allow null values for trailer
-    ]);
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'summary' => 'required|string',
+            'genre' => 'required|string',
+            'release_date' => 'nullable|date',
+            'runtime_minutes' => 'nullable|string', // Ensure this matches the string type
+            'rating' => 'required|numeric|between:0,10', // Correct range is 0 to 10
+            'image_poster' => 'nullable|url', // Optional: must be a valid URL if provided
+            'trailer' => 'nullable|url', // Optional: must be a valid URL if provided
+        ]);
+    
+        $movie = Movie::create($validatedData);
+    
+        return response()->json($movie, 201);
+    }
 
-    $movie = Movie::create($validatedData);
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'summary' => 'required|string',
+            'genre' => 'required|string',
+            'release_date' => 'nullable|date',
+            'runtime_minutes' => 'nullable|string', // Ensure this matches the string type
+            'rating' => 'required|numeric|between:0,10', // Correct range is 0 to 10
+            'image_poster' => 'nullable|url', // Optional: must be a valid URL if provided
+            'trailer' => 'nullable|url', // Optional: must be a valid URL if provided
+        ]);
 
-    return response()->json($movie, 201); // Return created movie with status code 201 (Created)
+        $movie = Movie::find($id);
+
+        if (!$movie) {
+            return response()->json(['error' => 'Movie not found'], 404);
+        }
+
+        $movie->update($validatedData);
+
+        return response()->json($movie);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $movie = Movie::find($id);
+
+        if (!$movie) {
+            return response()->json(['error' => 'Movie not found'], 404);
+        }
+
+        $movie->delete();
+
+        return response()->json(['message' => 'Movie deleted successfully']);
     }
 }

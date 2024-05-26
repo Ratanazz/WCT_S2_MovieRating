@@ -4,25 +4,46 @@ import { MOVIES_API_URL } from '../apiUrl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import AddMovieModal from './AddMovieModal';
+import EditMovieModal from './EditMovieModal';
+
 function CRUDMovieList() {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [currentMovieId, setCurrentMovieId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [csrfToken, setCsrfToken] = useState('');
 
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+  const handleOpenEditModal = (id) => {
+    setCurrentMovieId(id);
+    setShowEditModal(true);
+  };
+  const handleCloseEditModal = () => setShowEditModal(false);
+
+  const fetchMovies = async () => {
+    try {
+      const response = await axios.get(MOVIES_API_URL);
+      setMovies(response.data);
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+    }
+  };
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${MOVIES_API_URL}/${id}`, {
+        headers: {
+          'X-CSRF-TOKEN': csrfToken,
+        },
+      });
+      setMovies(prevMovies => prevMovies.filter(movie => movie.id !== id));
+    } catch (error) {
+      console.error('Error deleting movie:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await axios.get(MOVIES_API_URL);
-        setMovies(response.data);
-      } catch (error) {
-        console.error('Error fetching movies:', error);
-      }
-    };
-
     fetchMovies();
   }, []);
 
@@ -33,6 +54,7 @@ function CRUDMovieList() {
   const filteredMovies = movies.filter((movie) =>
     movie.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   useEffect(() => {
     // Fetch CSRF token from Laravel backend
     const fetchCsrfToken = async () => {
@@ -102,12 +124,12 @@ function CRUDMovieList() {
                           <td>
                             <ul className="list-inline m-0">
                               <li className="list-inline-item">
-                                <button className="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <button className="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit" onClick={() => handleOpenEditModal(movie.id)}>
                                   <FontAwesomeIcon icon={faEdit} />
                                 </button>
                               </li>
                               <li className="list-inline-item">
-                                <button className="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete">
+                                <button className="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"onClick={() => handleDelete(movie.id)}>
                                   <FontAwesomeIcon icon={faTrash} />
                                 </button>
                               </li>
@@ -123,6 +145,7 @@ function CRUDMovieList() {
           </div>
         </div>
       </div>
+      <EditMovieModal show={showEditModal} handleClose={handleCloseEditModal} movieId={currentMovieId} refreshMovies={fetchMovies} csrfToken={csrfToken} />
     </section>
   );
 }
