@@ -7,10 +7,12 @@ import Footer from './components/Footer';
 import AdminCRUD from './pages/AdminCRUD';
 import News from './pages/News';
 import MovieDetails from './pages/MovieDetails';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Login from './pages/LoginPage';
+import Register from './pages/Register';
+import { AuthProvider } from './components/AuthContext';
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <Navbar /> 
       <Routes>
@@ -21,11 +23,12 @@ function App() {
         <Route path="/news" element={<News />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/Register" element={<Register />} />
         
       </Routes>
       <Footer/>
     </Router>
+    </AuthProvider>
   );
 }
 

@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\AuthController;
 
 
 Route::get('/movies', [MovieController::class, 'index']);
@@ -12,8 +12,8 @@ Route::get('/movies/{movie}', [MovieController::class, 'show'])->where('movie', 
 Route::put('/movies/{movie}', [MovieController::class, 'update'])->where('movie', '[0-9]+');
 Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])->where('movie', '[0-9]+');
 
-Route::post('register',[ApiController::class,'register']);
-Route::post('login',[ApiController::class,'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('profile', [ApiController::class, 'profile']);
