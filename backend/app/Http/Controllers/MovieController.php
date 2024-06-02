@@ -25,15 +25,20 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $movie = Movie::find($id);
-
-        if (!$movie) {
-            return response()->json(['error' => 'Movie not found'], 404);
-        }
-
-        return response()->json($movie);
+    public function show($id) {
+        $movie = Movie::findOrFail($id);
+        $comments = $movie->comments()->with('user')->get();
+        // This might be the issue
+        $averageRating = $movie->ratings()->avg('rating');
+    
+    // Ensure it's a numeric type
+        $averageRating = is_numeric($averageRating) ? (float)$averageRating : 0;
+    
+        return response()->json([
+            'movie' => $movie,
+            'comments' => $comments,
+            'averageRating' => $averageRating
+        ]);
     }
 
     /**
