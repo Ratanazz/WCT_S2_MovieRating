@@ -10,6 +10,8 @@ import MovieDetails from './pages/MovieDetails';
 import Login from './pages/LoginPage';
 import Register from './pages/Register';
 import { AuthProvider } from './components/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import Unauthorized from './components/Unauthorized';
 function App() {
   return (
     <AuthProvider>
@@ -19,7 +21,8 @@ function App() {
         <Route path="/" element={<Home />} /> 
         <Route path="/home" element={<Home />} />
         <Route path="/movies" element={<Movies />} />
-        <Route path="/admincrud" element={<AdminCRUD />} />
+        <Route path="/admincrud" element={<ProtectedRoute allowedRoles={['admin']} element={<AdminCRUD />} />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="/news" element={<News />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/login" element={<Login />} />
