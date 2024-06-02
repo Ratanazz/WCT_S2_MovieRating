@@ -12,11 +12,12 @@ import Register from './pages/Register';
 import { AuthProvider } from './components/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Unauthorized from './components/Unauthorized';
+import NavbarComponent from './components/Navbarsart';
 function App() {
   return (
     <AuthProvider>
     <Router>
-      <Navbar /> 
+      <NavbarComponent /> 
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/home" element={<Home />} />
