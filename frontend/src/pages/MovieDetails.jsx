@@ -3,13 +3,11 @@ import React, { useState, useEffect } from 'react';
 import api from '../api';
 import { useParams } from 'react-router-dom';
 import './CssPage/MovieDetailCss.css';
-import {
-    FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, TelegramShareButton,
-    TelegramIcon,
-    // Add other social media components as needed
-} from 'react-share';
+import {FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, TelegramShareButton,TelegramIcon,} from 'react-share';
+import UserInteractionModal1 from '../components/UserinteractionModal1';
 
 function MovieDetails() {
+   
     const [movie, setMovie] = useState(null);
     const { id } = useParams(); // Retrieve the movie ID from the URL
     const [comments, setComments] = useState([]);
@@ -18,6 +16,17 @@ function MovieDetails() {
     const [userRating, setUserRating] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+     // Function to handle opening the modal
+     const openModal = () =>{
+        setShowModal(true);
+    }
+    
+
+    // Function to handle closing the modal
+    const closeModal = () => {
+        setShowModal(false);
+    };
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -41,27 +50,26 @@ function MovieDetails() {
         fetchMovie();
     }, [id]);
 
-    const handleCommentSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await api.post('http://127.0.0.1:8000/api/comments', { movie_id: id, content: newComment });
-            setComments([response.data, ...comments]);
-            setNewComment('');
-        } catch (error) {
-            console.error('Error submitting comment:', error);
+    const handleCommentSubmit = async (comment) => {
+        if (comment) {
+            try {
+                const response = await api.post('http://127.0.0.1:8000/api/comments', { movie_id: id, content: comment });
+                setComments([response.data, ...comments]);
+            } catch (error) {
+                console.error('Error submitting comment:', error);
+            }
         }
     };
 
-    const handleRatingSubmit = async (e) => {
-        e.preventDefault();
+    const handleRatingSubmit = async (rating) => {
         try {
-            const response = await api.post('http://127.0.0.1:8000/api/ratings', { movie_id: id, rating: userRating });
+            const response = await api.post('http://127.0.0.1:8000/api/ratings', { movie_id: id, rating: rating });
             setAverageRating(Number(response.data.averageRating) || 0);
-            setUserRating(0);
         } catch (error) {
             console.error('Error submitting rating:', error);
         }
     };
+    
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -106,7 +114,7 @@ function MovieDetails() {
                     </div>
                     <div className="topright">
                         <h3>Global Rating: {movie.rating}/10</h3>
-                        <h3>Audience Rate: 0/10</h3>
+                        <h3>Audience Rate: {Number(averageRating).toFixed(1)}/10</h3>
                         <iframe src={movie.trailer} frameBorder="0"></iframe>
                     </div>
                 </div>
@@ -145,44 +153,36 @@ function MovieDetails() {
                     <h5> {movie.production}</h5>
                 </div>
             </div>
+            <div className="user-review-section">
+                <div className="section-container">
+                <div className="user-review-section-tittle">
+                    <h4 className="red-line-heading">Audience Reviews</h4>
+                    <h5 onClick={openModal}>+ Your Review</h5>
+                    
 
-            <div className="user-interaction">
-                <div className="rating-section">
-                    <h4 className="red-line-heading">Rate This Movie</h4>
-                    <p>Average User Rating: {Number(averageRating).toFixed(1)} / 10</p>
-                    <form onSubmit={handleRatingSubmit}>
-                        <select value={userRating} onChange={e => setUserRating(parseInt(e.target.value))}>
-                            <option value="0">Select Rating</option>
-                            {[1, 2, 3, 4, 5,6,7,8,9,10].map(num => (
-                                <option key={num} value={num}>{num} Star{num !== 1 && 's'}</option>
-                            ))}
-                        </select>
-                        <button type="submit" className="submit-button">Submit Rating</button>
-                    </form>
                 </div>
-
-                <div className="comment-section">
-                    <h4 className="red-line-heading">Comments</h4>
-                    {comments.map(comment => (
+                <div className="comment-box">
+                        <div className="comment-card">
+                        {comments.map(comment => (
                         <div key={comment.id} className="comment">
                             <strong>{comment.user.name}</strong> said:
                             <p>{comment.content}</p>
                         </div>
                     ))}
-
-                    <h4 className="red-line-heading">Add a Comment</h4>
-                    <form onSubmit={handleCommentSubmit}>
-                        <textarea
-                            value={newComment}
-                            onChange={e => setNewComment(e.target.value)}
-                            placeholder="Your comment..."
-                            required
-                            className="comment-textarea"
-                        />
-                        <button type="submit" className="submit-button">Submit Comment</button>
-                    </form>
+                        </div>
+                </div>
                 </div>
             </div>
+            <UserInteractionModal1
+                showModal={showModal}
+                closeModal={closeModal}
+                userRating={userRating}
+                setUserRating={setUserRating}
+                handleRatingSubmit={handleRatingSubmit}
+                setNewComment={setNewComment}
+                handleCommentSubmit={handleCommentSubmit}
+            />
+            
         </div>
     );
 }

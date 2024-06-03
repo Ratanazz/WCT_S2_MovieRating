@@ -1,5 +1,5 @@
 .Moviedetail-container{
-    height: 200vh;
+    height: 300vh;
     background: #070F2B;
 }
 .detailtop-container{
@@ -79,4 +79,73 @@
 }
 .buttonshare{
     padding: 0px 10px ;
+}
+
+
+/* user-review section */
+.user-review-section{
+    width: 80%;
+    margin: 50px auto;
+
+}
+.section-container h4{
+    color: aliceblue;
+    font-size: 30px;
+    font-weight: bold;
+}
+.section-container h5{
+    font-size: 18px;
+    color: #f1c40f;
+    transition: all 0.3s ease;
+}
+.section-container h5:hover {
+    font-size: 20px; 
+    color: #e67e22; 
+    cursor: pointer;
+}
+.user-review-section-tittle{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    align-items: center;
+    
+}
+.comment-box{
+    width: 80%;
+    height: 800px;
+    border-radius: 15px;
+    background-color: #34495e;
+}
+.comment-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Optional: Adds space between comment cards */
+    padding: 20px; /* Optional: Adds padding around the comment box */
+}
+
+.comment-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Optional: Adds space between individual comments */
+    width: 80%;
+    margin: 1% 0 1% 3%;
+}
+
+.comment {
+    background-color: #f9f9f9; /* Light background color for the comment card */
+    border: 1px solid #ddd; /* Light border for the comment card */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Padding inside the comment card */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow effect */
+}
+
+.comment strong {
+    font-size: 16px; /* Style for the commenter's name */
+    color: #333; /* Darker color for the name */
+}
+
+.comment p {
+    margin: 5px 0 0; /* Margin adjustments for the comment content */
+    font-size: 14px; /* Style for the comment content */
+    color: #555; /* Slightly lighter color for the content */
 }
