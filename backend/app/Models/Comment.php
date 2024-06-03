@@ -24,4 +24,8 @@ class Comment extends Model
     {
         return $this->belongsTo(Movie::class);
     }
+    public function rating()
+    {
+        return $this->hasOne(Rating::class, 'comment_id');
+    }
 }

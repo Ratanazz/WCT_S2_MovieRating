@@ -33,4 +33,11 @@ class CommentController extends Controller
         $comment->delete();
         return response()->json(['message' => 'Comment deleted']);
     }
+
+    public function getCommentsWithRatings($movieId)
+    {
+        $comments = Comment::with(['user', 'rating'])->where('movie_id', $movieId)->get();
+
+        return response()->json($comments);
+    }
 }

@@ -21,9 +21,9 @@ Route::prefix('movies')->group(function () {
         Route::get('/', [MovieController::class, 'show']);
         Route::put('/', [MovieController::class, 'update'])->middleware('auth:sanctum');
         Route::delete('/', [MovieController::class, 'destroy'])->middleware('auth:sanctum');
-
-        Route::get('/comments', [MovieController::class, 'getComments']);
-        Route::get('/ratings', [MovieController::class, 'getRatings']);
+        Route::get('/comments', [CommentController::class, 'getCommentsWithRatings']); // get rating and comment both
+        // Route::get('/comments', [MovieController::class, 'getComments']); //get only comment
+        Route::get('/ratings', [MovieController::class, 'getRatings']); //get only rating
     });
 });
 

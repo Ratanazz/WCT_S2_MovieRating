@@ -1,23 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Css/UserInteractModel.css';
 
-function UserInteractionModal1({ showModal, closeModal, userRating, setUserRating, handleRatingSubmit, setNewComment, handleCommentSubmit }) {
-    const [localRating, setLocalRating] = useState(userRating);
-    const [localComment, setLocalComment] = useState('');
-
+function Commentmodal({ showModal, closeModal, userRating, setUserRating, handleRatingSubmit, newComment, setNewComment, handleCommentSubmit }) {
     if (!showModal) return null;
 
     const handleSubmit = () => {
-        if (localRating !== 0) {
-            handleRatingSubmit(localRating);
-            setUserRating(localRating);
+        if (userRating !== 0) {
+            handleRatingSubmit(userRating);
         }
-        if (localComment.trim()) {
-            handleCommentSubmit(localComment);
-            setNewComment(localComment);
+        if (newComment.trim()) {
+            handleCommentSubmit(newComment);
+            setNewComment('');
         }
-        setLocalComment('');
-        setLocalRating(0);
         closeModal();
     };
 
@@ -30,8 +24,8 @@ function UserInteractionModal1({ showModal, closeModal, userRating, setUserRatin
                     <div className="rating-section">
                         <h5>Rate This Movie</h5>
                         <select 
-                            value={localRating} 
-                            onChange={e => setLocalRating(parseInt(e.target.value))}
+                            value={userRating} 
+                            onChange={e => setUserRating(parseInt(e.target.value))}
                         >
                             <option value="0">Select Rating</option>
                             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
@@ -42,8 +36,8 @@ function UserInteractionModal1({ showModal, closeModal, userRating, setUserRatin
                     <div className="comment-section">
                         <h5>Add Your Comment</h5>
                         <textarea
-                            value={localComment}
-                            onChange={e => setLocalComment(e.target.value)}
+                            value={newComment}
+                            onChange={e => setNewComment(e.target.value)}
                             placeholder="Your thoughts on this movie..."
                             className="comment-textarea"
                         />
@@ -55,4 +49,4 @@ function UserInteractionModal1({ showModal, closeModal, userRating, setUserRatin
     );
 }
 
-export default UserInteractionModal1;
+export default Commentmodal;

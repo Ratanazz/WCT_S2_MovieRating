@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-// import api from 'axios';
 import api from '../api';
 import { useParams } from 'react-router-dom';
 import './CssPage/MovieDetailCss.css';
-import {FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, TelegramShareButton,TelegramIcon,} from 'react-share';
-import UserInteractionModal1 from '../components/UserinteractionModal1';
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, TelegramShareButton, TelegramIcon } from 'react-share';
+import Commentmodal from '../components/Commentmodal';
 
 function MovieDetails() {
-   
     const [movie, setMovie] = useState(null);
     const { id } = useParams(); // Retrieve the movie ID from the URL
     const [comments, setComments] = useState([]);
@@ -17,13 +15,11 @@ function MovieDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
-     // Function to handle opening the modal
-     const openModal = () =>{
-        setShowModal(true);
-    }
-    
 
-    // Function to handle closing the modal
+    const openModal = () => {
+        setShowModal(true);
+    };
+
     const closeModal = () => {
         setShowModal(false);
     };
@@ -69,7 +65,6 @@ function MovieDetails() {
             console.error('Error submitting rating:', error);
         }
     };
-    
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -158,33 +153,32 @@ function MovieDetails() {
                 <div className="user-review-section-tittle">
                     <h4 className="red-line-heading">Audience Reviews</h4>
                     <h5 onClick={openModal}>+ Your Review</h5>
-                    
-
                 </div>
                 <div className="comment-box">
-                        <div className="comment-card">
+                    <div className="comment-card">
                         {comments.map(comment => (
-                        <div key={comment.id} className="comment">
-                            <strong>{comment.user.name}</strong> said:
-                            <p>{comment.content}</p>
-                        </div>
-                    ))}
-                        </div>
+                            <div key={comment.id} className="comment">
+                                <strong>{comment.user.name}</strong> said:
+                                <p>{comment.content}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 </div>
             </div>
-            <UserInteractionModal1
+            <Commentmodal
                 showModal={showModal}
                 closeModal={closeModal}
                 userRating={userRating}
                 setUserRating={setUserRating}
                 handleRatingSubmit={handleRatingSubmit}
+                newComment={newComment}
                 setNewComment={setNewComment}
                 handleCommentSubmit={handleCommentSubmit}
             />
-            
         </div>
     );
 }
 
 export default MovieDetails;
+
