@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import './CssPage/MovieDetailCss.css';
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, TelegramShareButton, TelegramIcon } from 'react-share';
 import Commentmodal from '../components/Commentmodal';
+import UserRating from '../components/UserRating';
 
 function MovieDetails() {
     const [movie, setMovie] = useState(null);
@@ -15,7 +16,14 @@ function MovieDetails() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [showRatingModal, setShowRatingModal] = useState(false);
+    const openRatingModal = () => setShowRatingModal(true);
+        
+    
 
+    const closeRatingModal = () => setShowRatingModal(false);
+        
+    
     const openModal = () => {
         setShowModal(true);
     };
@@ -61,6 +69,7 @@ function MovieDetails() {
         try {
             const response = await api.post('http://127.0.0.1:8000/api/ratings', { movie_id: id, rating: rating });
             setAverageRating(Number(response.data.averageRating) || 0);
+            closeRatingModal(); // Close the modal after the rating is submitted
         } catch (error) {
             console.error('Error submitting rating:', error);
         }
@@ -110,6 +119,15 @@ function MovieDetails() {
                     <div className="topright">
                         <h3>Global Rating: {movie.rating}/10</h3>
                         <h3>Audience Rate: {Number(averageRating).toFixed(1)}/10</h3>
+                        <h4 onClick={openRatingModal}>Your Rating</h4>
+                        <UserRating
+                
+                showRatingModal={showRatingModal}
+                closeRatingModal={closeRatingModal}
+                userRating={userRating}
+                setUserRating={setUserRating}
+                handleRatingSubmit={handleRatingSubmit}
+            />
                         <iframe src={movie.trailer} frameBorder="0"></iframe>
                     </div>
                 </div>
@@ -160,6 +178,9 @@ function MovieDetails() {
                             <div key={comment.id} className="comment">
                                 <strong>{comment.user.name}</strong> said:
                                 <p>{comment.content}</p>
+                                {comment.rating && (
+                                <p>Rating: {comment.rating.rating}</p>
+                            )}
                             </div>
                         ))}
                     </div>
@@ -169,12 +190,17 @@ function MovieDetails() {
             <Commentmodal
                 showModal={showModal}
                 closeModal={closeModal}
-                userRating={userRating}
-                setUserRating={setUserRating}
-                handleRatingSubmit={handleRatingSubmit}
                 newComment={newComment}
                 setNewComment={setNewComment}
                 handleCommentSubmit={handleCommentSubmit}
+            />
+            <UserRating
+                
+                showRatingModal={showRatingModal}
+                closeRatingModal={closeRatingModal}
+                userRating={userRating}
+                setUserRating={setUserRating}
+                handleRatingSubmit={handleRatingSubmit}
             />
         </div>
     );

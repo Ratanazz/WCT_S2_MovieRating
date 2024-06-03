@@ -35,9 +35,9 @@ class CommentController extends Controller
     }
 
     public function getCommentsWithRatings($movieId)
-    {
-        $comments = Comment::with(['user', 'rating'])->where('movie_id', $movieId)->get();
+{
+    $comments = Comment::with(['user', 'rating'])->where('movie_id', $movieId)->get();
 
-        return response()->json($comments);
-    }
+    return response()->json($comments);
+}
 }
