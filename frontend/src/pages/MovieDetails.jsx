@@ -3,6 +3,9 @@ import api from '../api';
 import { useParams } from 'react-router-dom';
 import './CssPage/MovieDetailCss.css';
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, TelegramShareButton, TelegramIcon } from 'react-share';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
 import Commentmodal from '../components/Commentmodal';
 import UserRating from '../components/UserRating';
 
@@ -17,20 +20,16 @@ function MovieDetails() {
     const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showRatingModal, setShowRatingModal] = useState(false);
+
+    // Pagination state
+    const [currentPage, setCurrentPage] = useState(1);
+    const commentsPerPage = 6;
+
     const openRatingModal = () => setShowRatingModal(true);
-        
-    
-
     const closeRatingModal = () => setShowRatingModal(false);
-        
     
-    const openModal = () => {
-        setShowModal(true);
-    };
-
-    const closeModal = () => {
-        setShowModal(false);
-    };
+    const openModal = () => setShowModal(true);
+    const closeModal = () => setShowModal(false);
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -75,9 +74,24 @@ function MovieDetails() {
         }
     };
 
+    const handleNextPage = () => {
+        if (currentPage < Math.ceil(comments.length / commentsPerPage)) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const indexOfLastComment = currentPage * commentsPerPage;
+    const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+    const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
+
     if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-    if (!movie) return <div>Movie not found</div>;
+    
 
     // For sharing
     const shareUrl = window.location.href; // Get current page URL
@@ -117,17 +131,21 @@ function MovieDetails() {
                         </div>
                     </div>
                     <div className="topright">
-                        <h3>Global Rating: {movie.rating}/10</h3>
-                        <h3>Audience Rate: {Number(averageRating).toFixed(1)}/10</h3>
-                        <h4 onClick={openRatingModal}>Your Rating</h4>
+                        <div className="rating-of-movie">
+                            <h3>Global Rating: {movie.rating}/10</h3>
+                            <h3>Audience Rate: {Number(averageRating).toFixed(1)}/10</h3>
+                        </div>
+                        <div className="leave-your-rating"onClick={openRatingModal}>
+                            <FontAwesomeIcon icon={faStar} style={{ color: "#FFD43B" }} />
+                            <h4 >Leave Your Rating</h4>
+                        </div>
                         <UserRating
-                
-                showRatingModal={showRatingModal}
-                closeRatingModal={closeRatingModal}
-                userRating={userRating}
-                setUserRating={setUserRating}
-                handleRatingSubmit={handleRatingSubmit}
-            />
+                            showRatingModal={showRatingModal}
+                            closeRatingModal={closeRatingModal}
+                            userRating={userRating}
+                            setUserRating={setUserRating}
+                            handleRatingSubmit={handleRatingSubmit}
+                        />
                         <iframe src={movie.trailer} frameBorder="0"></iframe>
                     </div>
                 </div>
@@ -168,23 +186,28 @@ function MovieDetails() {
             </div>
             <div className="user-review-section">
                 <div className="section-container">
-                <div className="user-review-section-tittle">
-                    <h4 className="red-line-heading">Audience Reviews</h4>
-                    <h5 onClick={openModal}>+ Your Review</h5>
-                </div>
-                <div className="comment-box">
-                    <div className="comment-card">
-                        {comments.map(comment => (
-                            <div key={comment.id} className="comment">
-                                <strong>{comment.user.name}</strong> said:
-                                <p>{comment.content}</p>
-                                {comment.rating && (
-                                <p>Rating: {comment.rating.rating}</p>
-                            )}
-                            </div>
-                        ))}
+                    <div className="user-review-section-tittle">
+                        <h4 className="red-line-heading">Audience Reviews</h4>
+                        <h5 onClick={openModal}>+ Your Review</h5>
                     </div>
-                </div>
+                    <div className="comment-box">
+                        <div className="comment-card">
+                            {currentComments.map(comment => (
+                                <div key={comment.id} className="comment">
+                                    <strong>{comment.user.name}</strong> said:
+                                    <p>{comment.content}</p>
+                                    {comment.rating && (
+                                        <p>Rating: {comment.rating.rating}</p>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                        <div className="pagination-buttons">
+                        <button onClick={handlePreviousPage} disabled={currentPage === 1}>Previous</button>
+                        <button onClick={handleNextPage} disabled={currentPage === Math.ceil(comments.length / commentsPerPage)}>Next</button>
+                    </div>
+                    </div>
+                    
                 </div>
             </div>
             <Commentmodal
@@ -195,7 +218,6 @@ function MovieDetails() {
                 handleCommentSubmit={handleCommentSubmit}
             />
             <UserRating
-                
                 showRatingModal={showRatingModal}
                 closeRatingModal={closeRatingModal}
                 userRating={userRating}
@@ -207,4 +229,3 @@ function MovieDetails() {
 }
 
 export default MovieDetails;
-
