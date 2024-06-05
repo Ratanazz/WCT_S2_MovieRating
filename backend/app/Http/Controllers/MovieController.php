@@ -25,21 +25,17 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        $movie = Movie::findOrFail($id);
-        $comments = $movie->comments()->with('user')->get();
-        // This might be the issue
-        $averageRating = $movie->ratings()->avg('rating');
-    
-    // Ensure it's a numeric type
-        $averageRating = is_numeric($averageRating) ? (float)$averageRating : 0;
-    
-        return response()->json([
-            'movie' => $movie,
-            'comments' => $comments,
-            'averageRating' => $averageRating
-        ]);
-    }
+    public function show($id)
+{
+    $movie = Movie::with('comments.user', 'ratings')->findOrFail($id);
+    $averageRating = $movie->averageRating();
+    return response()->json([
+        'movie' => $movie,
+        'comments' => $movie->comments,
+        'averageRating' => $averageRating,
+        'youtubeVideoId' => $movie->youtube_video_id // Include YouTube video ID
+    ]);
+}
 
     /**
      * Store a newly created resource in storage.

@@ -37,5 +37,21 @@ use HasFactory;
     {
         return $this->ratings()->avg('rating');
     }
+//For fetch comment from youtube it extract video id from Trailer url
+public function getYoutubeVideoIdAttribute()
+    {
+        $url = $this->trailer;
+        $parsedUrl = parse_url($url);
+
+        // Extract the video ID from the path of the embed URL
+        if (isset($parsedUrl['path']) && strpos($parsedUrl['path'], '/embed/') === 0) {
+            $pathSegments = explode('/', $parsedUrl['path']);
+            return $pathSegments[2] ?? null;
+        }
+
+        return null;
+    }
+
+    protected $appends = ['youtube_video_id'];
 }
 

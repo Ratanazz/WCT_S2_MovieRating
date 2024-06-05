@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\YouTubeCommentsController;
 
 
 Route::prefix('movies')->group(function () {
@@ -27,6 +28,7 @@ Route::prefix('movies')->group(function () {
     });
 });
 
+Route::get('/youtube-comments/{videoId}', [YouTubeCommentsController::class, 'getComments']);
 // Authentication Routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);

@@ -1,5 +1,5 @@
 .Moviedetail-container{
-    height: 300vh;
+    height: 400vh;
     background: #070F2B;
 }
 .detailtop-container{
@@ -136,7 +136,7 @@
 }
 .comment-box{
     width: 80%;
-    height: 800px;
+    min-height: 800px;
     border-radius: 15px;
     background-color: #34495e;
 }
@@ -199,4 +199,63 @@
 
 .pagination-buttons button:hover:not(:disabled) {
     background-color: #e67e22;
+}
+.youtube-comments-section{
+    width: 80%;
+    margin: 0 auto;
+}
+.youtube-comment-box{
+    width: 80%;
+    min-height: 800px; /* Set minimum height */
+    border-radius: 15px;
+    background-color: #34495e;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+
+.youtube-comments {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 90%;
+    margin: 20px auto ;
+    
+}
+
+.youtube-comment {
+    display: flex;
+    align-items: flex-start;
+    background-color: #ffffff;
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+}
+
+.youtube-comment img.author-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 5px;
+}
+
+.youtube-comment div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.youtube-comment strong {
+    font-size: 15px;
+    color: #333;
+}
+
+.youtube-comment p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
 }
