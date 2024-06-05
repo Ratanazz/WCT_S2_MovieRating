@@ -2,6 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../Assetes/popcornlogo.png';
 import './Css/Navbarsart.css';
@@ -27,7 +30,9 @@ function NavbarComponent() {
             <Container className="custom-container">
                 <img src={logo} alt="Login Icon" style={{ width: '50px', height: '50px', marginRight: '8px' }} />
                 <Navbar.Brand as={Link} to="/" className='navbar-brand-tittle'>MovieRating</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Toggle aria-controls="responsive-navbar-nav">
+                <FontAwesomeIcon icon={faBars} size="lg" />
+                </Navbar.Toggle>
                 <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-center">
                     <Nav className="me-auto ms-auto">
                         <Nav.Link as={Link} to="/" className='navbar-text'><h1>HOME</h1></Nav.Link>

@@ -9,14 +9,14 @@ class YouTubeCommentsController extends Controller
     public function getComments($videoId) {
         $apiKey = 'AIzaSyBNcNUh-0t4QBFPm898Aja9Ra_75h9GI0s';
         $client = new Client([
-            'verify' => false // WARNING: This disables SSL verification
+            'verify' => false // This disables SSL verification
         ]);
         $response = $client->get("https://www.googleapis.com/youtube/v3/commentThreads", [
             'query' => [
                 'part' => 'snippet',
                 'videoId' => $videoId,
                 'key' => $apiKey,
-                'maxResults' => 50, // Adjust as needed
+                'maxResults' => 100, // can adjust
             ]
         ]);
     

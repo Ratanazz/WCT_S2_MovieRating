@@ -39,14 +39,16 @@ function SwiperHomepage() {
       <div className="infomation">
         <h1>{movie.name}</h1>
         <div className="info1">
-          <h2>Runtime: {movie.runtime}</h2><h2>Release: {movie.release_date}</h2>
-        </div>
-        <div className="rate">
+          <h2>Runtime: {movie.runtime}</h2>
+          <h2>Release: {movie.release_date}</h2>
+          <div className="rate">
           <div className="star-icon">
             <FontAwesomeIcon icon={faStar} style={{ color: "#FFD43B" }} />
           </div>
           <h3>{movie.rating}/5</h3>
         </div>
+        </div>
+        
       </div>
       <div className="Poster">
         <img src={movie.image_poster} alt="" />

@@ -1,33 +1,40 @@
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Stack from 'react-bootstrap/Stack';
-import Image from 'react-bootstrap/Image';
-import Nav from 'react-bootstrap/Nav';
-import NavLink from 'react-bootstrap/NavLink';
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { FaFacebook, FaInstagram, FaTelegram } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="bg-dark text-white py-5">
-      <Container fluid>
+    <footer className="footer bg-light" style={{ borderTop: "2px solid #d3d3d3" }}>
+      <Container>
         <Row>
-          <Col xs={6} md={3}>
-            <Stack gap={1}>
-              <Image src="" alt="Company Logo"  fluid rounded />
-              <p>Company Name</p>
-             
-            </Stack>
+          <Col>
+            <h5>Contact</h5>
+            <ul className="list-unstyled">
+              <li>Address: 123  Street, ITE</li>
+              <li>Email: info@movierating.com</li>
+              
+            </ul>
           </Col>
-          <Col xs={6} md={3}>
-            <h4 className="mb-3">Team Member</h4>
-            <Nav>
-              <NavLink href="/">Home</NavLink>
-              <NavLink href="/about">About</NavLink>
-              <NavLink href="/products">Products</NavLink>
-              <NavLink href="/hiring">We're hiring!</NavLink>
-            </Nav>
+          <Col>
+            <h5>Follow Us</h5>
+            <ul className="list-unstyled">
+              <li>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                  <FaFacebook size={24} /> Facebook
+                </a>
+              </li>
+              {/* <li>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                  <FaInstagram size={24} /> Instagram
+                </a>
+              </li> */}
+              <li>
+                <a href="https://t.me/movierating" target="_blank" rel="noopener noreferrer">
+                  <FaTelegram size={24} />  Telegram
+                </a>
+              </li>
+            </ul>
           </Col>
-          
         </Row>
       </Container>
     </footer>
