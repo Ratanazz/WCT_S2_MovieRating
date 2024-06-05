@@ -33,6 +33,9 @@
     height: 250px;
     border-radius: 10px;
 }
+.release_date{
+    padding: 0 6px;
+}
 .release_date h1{
     font-size: 21px;
 }
