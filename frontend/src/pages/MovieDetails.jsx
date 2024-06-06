@@ -180,7 +180,7 @@ function MovieDetails() {
                             <h3>Audience Rate: {Number(averageRating).toFixed(1)}/10</h3>
                         </div>
                         <div className="leave-your-rating" onClick={openRatingModal}>
-                            <FontAwesomeIcon icon={faStar} style={{ color: "#FFD43B" }} />
+                            <FontAwesomeIcon icon={faStar} className='rating-icon' style={{ color: "#FFD43B" }} />
                             <h4>Leave Your Rating</h4>
                         </div>
                         <iframe src={movie.trailer} frameBorder="0"></iframe>

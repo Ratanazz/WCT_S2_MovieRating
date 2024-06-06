@@ -51,6 +51,19 @@
     .slider-container {
         width: 90%;
     }
+    .movie-card h2 {
+        font-size: 14px;
+    }
+
+    .movie-card h3 {
+        font-size: 13px;
+    }
+
+    .movie-card {
+        min-height: 80px;
+        margin: 2% 0;
+        width: 170px;
+    }
 }
 
 @media (max-width: 992px) {
@@ -71,7 +84,7 @@
 
 @media (max-width: 576px) {
     .movie-card h2 {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .movie-card h3 {
@@ -79,8 +92,27 @@
     }
 
     .movie-card {
-        height: auto;
+        min-height: 80px;
         margin: 2% 0;
+        width: 170px;
+    }
+    .movie-card:hover {
+        transform: scale(1.02); /* Increase size on hover */
+      }
+}
+@media (max-width: 400px) {
+    .movie-card h2 {
+        font-size: 12px;
+    }
+
+    .movie-card h3 {
+        font-size: 10px;
+    }
+
+    .movie-card {
+        height: 330px;
+        margin: 2% 0;
+        width: 150px;
     }
     .movie-card:hover {
         transform: scale(1.02); /* Increase size on hover */

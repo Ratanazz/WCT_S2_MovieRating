@@ -259,3 +259,107 @@
     font-size: 14px;
     color: #555;
 }
+
+@media (max-width: 900px) {
+
+.detailtop-container{
+    width: 95%;
+    margin: 0 auto;
+    padding: 1rem 0 0 0;
+}
+.detailtop-container h1{
+    font-size: 32px;
+}
+.Detailtop h2{
+    font-size: 20px;
+}
+.topleft img{
+    width: 200px;
+    
+}
+.Detailtop{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.social-share-buttons h3{
+    font-size: 16px;
+
+}
+.share-button{
+    size: 5;
+}
+.rating-of-movie h3{
+    font-size: 20px;
+}
+.leave-your-rating h4{
+    font-size: 18px;
+}
+.leave-your-rating .fa-star {
+    width: 20px; /* Adjust the size as needed */
+    height: 20px;
+    
+  }
+  .topright iframe{
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+}.detail-info{
+    width: 95%;
+}
+.detail-info h4{
+    font-size: 20px;
+}
+.detail-info p{
+    font-size: 15px;
+}
+.detail-info h5{
+    font-size: 17px;
+}
+.user-review-section{
+    width: 95%;
+    
+}
+.user-review-section-tittle{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.comment-box{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+.user-review-section-tittle h4{
+    font-size: 25px;
+}
+.youtube-comments-section{
+    width: 95%;
+}
+.youtube-comments-section h4{
+    color: white;
+}
+.youtube-comment-box{
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.youtube-comment img.author-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 5px;
+}
+.youtube-comment strong {
+    font-size: 13px;
+    color: #333;
+}
+
+.youtube-comment p {
+    margin: 0;
+    font-size: 12px;
+    color: #555;
+}
+}
