@@ -1,5 +1,5 @@
 .Moviedetail-container{
-    height: 400vh;
+    min-height: 450vh;
     background: #070F2B;
 }
 .detailtop-container{

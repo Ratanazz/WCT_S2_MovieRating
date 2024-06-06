@@ -4,6 +4,7 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../components/AuthContext';
+import Loginposter from '../Assetes/loginposter.jpg';
 
 
 function LoginPage() {
@@ -26,18 +27,18 @@ function LoginPage() {
             });
 
             const data = await response.json();
-            console.log(data); // Log the response for debugging
+            console.log(data); 
 
             if (response.ok) {
                 setLoginSuccess(true);
-                login(data.token, data.user); // Store token and user info
+                login(data.token, data.user); 
             } else {
                 setLoginSuccess(false);
-                // Handle unsuccessful login, e.g., display an error message
+                
             }
         } catch (error) {
             console.error('Error:', error);
-            // Handle error, e.g., display an error message
+            
         }
     };
 
@@ -46,7 +47,7 @@ function LoginPage() {
             <MDBCard>
                 <MDBRow className='g-0'>
                     <MDBCol md='4'>
-                        {/* <MDBCardImage src={catwellcome} alt="login form" className='rounded-start w-100' /> */}
+                        <MDBCardImage src={Loginposter} alt="login form" className='rounded-start w-100' />
                     </MDBCol>
                     <MDBCol md='6'>
                         <MDBCardBody className='d-flex flex-column'>

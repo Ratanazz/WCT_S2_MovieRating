@@ -3,7 +3,7 @@ import { MDBBtn, MDBContainer, MDBCard, MDBCardBody, MDBCardImage, MDBRow, MDBCo
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from 'react-router-dom';
-
+import Loginposter from '../Assetes/loginposter.jpg';
 function Register() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -27,19 +27,19 @@ function Register() {
             });
             
             const data = await response.json();
-             console.log(data); // Log the response for debugging
+             console.log(data); 
 
-             // Check if login was successful based on the response from the server
+             
                 if (response.ok) {
                 setLoginSuccess(true);
-                // Perform additional actions upon successful login, e.g., redirect to another page or store token in local storage
+               
                 } else {
                 setLoginSuccess(false);
-                // Handle unsuccessful login, e.g., display an error message to the user
+                
              }
                 } catch (error) {
                     console.error('Error:', error);
-                // Handle error, e.g., display an error message to the user
+                
         }
     };
 
@@ -48,7 +48,7 @@ function Register() {
             <MDBCard>
                 <MDBRow className='g-0'>
                     <MDBCol md='4'>
-                        {/* <MDBCardImage src={catwellcome} alt="login form" className='rounded-start w-100' /> */}
+                        <MDBCardImage src={Loginposter} alt="login form" className='rounded-start w-100' />
                     </MDBCol>
                     <MDBCol md='6'>
                         <MDBCardBody className='d-flex flex-column'>

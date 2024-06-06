@@ -27,6 +27,11 @@ Route::prefix('movies')->group(function () {
         Route::get('/ratings', [MovieController::class, 'getRatings']); //get only rating
     });
 });
+Route::get('/movies', [MovieController::class, 'index']);
+Route::post('/movies', [MovieController::class, 'store']);
+Route::get('/movies/{movie}', [MovieController::class, 'show'])->where('movie', '[0-9]+');
+Route::put('/movies/{movie}', [MovieController::class, 'update'])->where('movie', '[0-9]+');
+Route::delete('/movies/{movie}', [MovieController::class, 'destroy'])->where('movie', '[0-9]+');
 
 Route::get('/youtube-comments/{videoId}', [YouTubeCommentsController::class, 'getComments']);
 // Authentication Routes

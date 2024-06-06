@@ -28,13 +28,13 @@ function AddMovieModal({ show, handleClose }) {
     axios
       .post(MOVIES_API_URL, formData)
       .then((response) => {
-        // Handle success, maybe show a success message
+       
         console.log('Movie added successfully:', response.data);
-        // Close the modal after successful submission
+        
         handleClose();
       })
       .catch((error) => {
-        // Handle error, maybe show an error message
+        
         console.error('Error adding Movie:', error);
       });
   };

@@ -49,10 +49,10 @@ function MovieDetails() {
                 }
 
                 if (response.data.youtubeVideoId) {
-                    console.log("YouTube Video ID:", response.data.youtubeVideoId); // Debugging line
+                    console.log("YouTube Video ID:", response.data.youtubeVideoId); 
                     fetchYoutubeComments(response.data.youtubeVideoId);
                 } else {
-                    console.log("No YouTube video ID found."); // Debugging line
+                    console.log("No YouTube video ID found."); 
                 }
             } catch (error) {
                 console.error('Error fetching movie details:', error);
@@ -68,12 +68,12 @@ function MovieDetails() {
     const fetchYoutubeComments = async (videoId) => {
         try {
             const response = await api.get(`http://127.0.0.1:8000/api/youtube-comments/${videoId}`);
-            console.log("YouTube comments response:", response.data); // Debugging line
-            const data = response.data; // Directly using response.data since it's already parsed
+            console.log("YouTube comments response:", response.data); 
+            const data = response.data; 
             if (data.items) {
                 setYoutubeComments(data.items);
             } else {
-                console.log("No items in YouTube comments response."); // Debugging line
+                console.log("No items in YouTube comments response."); 
             }
         } catch (error) {
             console.error('Error fetching YouTube comments:', error);
@@ -138,10 +138,10 @@ function MovieDetails() {
     if (isLoading) return <div>Loading...</div>;
 
     // For sharing
-    const shareUrl = window.location.href; // Get current page URL
-    const shareTitle = `${movie.name} - Movie Rating`; // Dynamic title
+    const shareUrl = window.location.href; 
+    const shareTitle = `${movie.name} - Movie Rating`; 
     const shareQuote = ` Genre: ${movie.genre}, UserRating: ${movie.rating}/10`;
-    const shareHashtag = '#movies #moviereview'; // Your desired hashtag
+    const shareHashtag = '#movies #moviereview'; 
 
     return (
         <div className="Moviedetail-container">

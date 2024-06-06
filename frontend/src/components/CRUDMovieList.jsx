@@ -56,11 +56,11 @@ function CRUDMovieList() {
   );
 
   useEffect(() => {
-    // Fetch CSRF token from Laravel backend
+    
     const fetchCsrfToken = async () => {
       try {
         const response = await axios.get('/sanctum/csrf-cookie');
-        // Extract CSRF token from response headers
+        
         const token = response.headers['x-csrf-token'];
         setCsrfToken(token);
       } catch (error) {

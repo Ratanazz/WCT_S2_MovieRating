@@ -5,7 +5,7 @@ function NewsCard({ title, description, imageUrl, imagePosition }) {
   return (
     <Card className="mb-4">
       <Card.Body className="d-flex">
-        {/* Conditionally render the image based on the image position */}
+        
         {imagePosition === 'left' && (
           <div className="me-3">
             <img src={imageUrl} alt={title} style={{ maxWidth: '100px' }} />

@@ -47,7 +47,7 @@ function Profile() {
           </div>
         </div>
       </div>
-      <div className="adoption-status">
+      <div className="Status">
         <h3>Your Cat Adoption Request</h3>
       </div>
       {/* Add more user fields as necessary */}
