@@ -13,6 +13,7 @@ import { AuthProvider } from './components/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Unauthorized from './components/Unauthorized';
 import NavbarComponent from './components/Navbarsart';
+import Profile from './pages/Profile';
 function App() {
   return (
     <AuthProvider>
@@ -28,6 +29,7 @@ function App() {
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/Profile" element={<Profile />} />
         
       </Routes>
       <Footer/>

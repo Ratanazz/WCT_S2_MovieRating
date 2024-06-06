@@ -8,7 +8,7 @@ use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\YouTubeCommentsController;
 
-
+Route::middleware('auth:sanctum')->get('/user', [AuthController::class, 'getUser']);
 Route::prefix('movies')->group(function () {
     Route::get('/', [MovieController::class, 'index']);
     Route::post('/', [MovieController::class, 'store'])->middleware('auth:sanctum');
