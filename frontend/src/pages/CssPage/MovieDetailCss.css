@@ -204,6 +204,9 @@
     width: 80%;
     margin: 0 auto;
 }
+.youtube-comments-section h4{
+ color: #ddd;
+}
 .youtube-comment-box{
     width: 80%;
     min-height: 800px; /* Set minimum height */

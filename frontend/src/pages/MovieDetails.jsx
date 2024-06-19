@@ -41,7 +41,7 @@ function MovieDetails() {
             setIsLoading(true);
             setError(null);
             try {
-                const response = await api.get(`http://127.0.0.1:8000/api/movies/${id}`);
+                const response = await api.get(`/movies/${id}`);
                 setMovie(response.data.movie);
                 setComments(response.data.comments || []);
                 if (response.data.averageRating) {
@@ -67,7 +67,7 @@ function MovieDetails() {
 
     const fetchYoutubeComments = async (videoId) => {
         try {
-            const response = await api.get(`http://127.0.0.1:8000/api/youtube-comments/${videoId}`);
+            const response = await api.get(`/youtube-comments/${videoId}`);
             console.log("YouTube comments response:", response.data); 
             const data = response.data; 
             if (data.items) {
@@ -83,7 +83,7 @@ function MovieDetails() {
     const handleCommentSubmit = async (comment) => {
         if (comment) {
             try {
-                const response = await api.post('http://127.0.0.1:8000/api/comments', { movie_id: id, content: comment });
+                const response = await api.post('/comments', { movie_id: id, content: comment });
                 setComments([response.data, ...comments]);
             } catch (error) {
                 console.error('Error submitting comment:', error);
@@ -93,7 +93,7 @@ function MovieDetails() {
 
     const handleRatingSubmit = async (rating) => {
         try {
-            const response = await api.post('http://127.0.0.1:8000/api/ratings', { movie_id: id, rating: rating });
+            const response = await api.post('/ratings', { movie_id: id, rating: rating });
             setAverageRating(Number(response.data.averageRating) || 0);
             closeRatingModal(); // Close the modal after the rating is submitted
         } catch (error) {

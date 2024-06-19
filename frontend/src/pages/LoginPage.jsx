@@ -5,7 +5,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../components/AuthContext';
 import Loginposter from '../Assetes/loginposter.jpg';
-
+import api from '../api';
 
 function LoginPage() {
     const [email, setEmail] = useState('');
